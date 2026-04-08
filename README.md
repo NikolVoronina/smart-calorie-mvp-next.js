@@ -1,3 +1,8 @@
+## Live Demo 
+
+https://smart-calorie-mvp-next-js.vercel.app/
+
+
 # Smart Calorie Calculator
 
 A simple and modern web app for calculating daily calories, macros, and water intake based on user data.
