@@ -90,7 +90,7 @@ export default function Home() {
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
-                placeholder="21"
+                placeholder=""
               />
             </div>
 
@@ -103,7 +103,7 @@ export default function Home() {
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
-                placeholder="60"
+                placeholder=""
               />
             </div>
 
@@ -116,7 +116,7 @@ export default function Home() {
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
                 className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
-                placeholder="174"
+                placeholder=""
               />
             </div>
 
