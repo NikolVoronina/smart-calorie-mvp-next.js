@@ -1,3 +1,5 @@
+import { classifyGoal } from "@/lib/classifyGoal";
+
 export type Gender = "male" | "female";
 export type Activity = "light" | "moderate" | "active";
 export type Goal = "lose" | "maintain" | "gain";
@@ -8,6 +10,7 @@ export type NutritionResult = {
   fat: number;
   carbs: number;
   water: number;
+  suggestedGoal: string;
 };
 
 type CalculateNutritionParams = {
@@ -56,12 +59,19 @@ export function calculateNutrition({
   const carbs = Math.round((calories - (protein * 4 + fat * 9)) / 4);
   const water = Math.round(weight * 35);
 
+  const suggestedGoal = classifyGoal({
+  weight,
+  height,
+  activity,
+});
+
   return {
     calories,
     protein,
     fat,
     carbs,
     water,
+    suggestedGoal,
   };
 }
 

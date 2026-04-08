@@ -1,15 +1,37 @@
-# LOGG – Fordypningsoppgave
+# Logg – Fordypningsoppgave
+
+## Dag 1 – Videreutvikling av Smart Calorie Calculator
+
+| Tid | Hva jeg gjorde | Beskrivelse |
+|-----|---------------|------------|
+| 09:00 – 10:00 | Analyse av prosjekt | Startet med å gå gjennom eksisterende Next.js-prosjekt. Kalkulatoren var delvis implementert, men manglet struktur og utvidelser. |
+| 10:00 – 11:30 | Implementering av kalkulasjon | Fullførte funksjonen for beregning av kalorier, makronæringsstoffer og vanninntak basert på brukerinput. |
+| 11:30 – 12:30 | UI forbedringer | La til en animert bakgrunn med flytende former for å gjøre designet mer moderne og visuelt interessant. |
+| 13:00 – 14:30 | Maskinlæring – målklassifisering | Implementerte en enkel klassifikasjonslogikk (`classifyGoal.ts`) basert på BMI og aktivitetsnivå. |
+| 14:30 – 15:30 | Integrasjon | Integrerte klassifikasjonen i hovedfunksjonen (`calculateNutrition.ts`) og sendte resultatet til UI. |
+| 15:30 – 16:00 | UI visning av anbefaling | Oppdaterte ResultCard-komponenten for å vise “Suggested goal” til brukeren. |
 
 ---
 
-## 📅 Dag 1
+## Hva jeg har lært
 
-| Kategori | Innhold |
-|---|---|
-| Hva jeg gjorde | I dag startet jeg fordypningsoppgaven min med utgangspunkt i et tidligere MVP-prosjekt i Next.js og TypeScript. Prosjektet var fortsatt på et tidlig stadium, men det inneholdt allerede en enkel startside, inputfelter og en grunnleggende funksjon for å beregne kaloribehov. Jeg brukte dagen på å analysere hva som allerede var laget, og på å planlegge hvordan prosjektet kan videreutvikles til en mer komplett applikasjon. Jeg bestemte også at jeg vil integrere en enkel form for maskinlæring gjennom klassifisering av brukerens mål. |
-| Hva jeg lærte | Jeg lærte at det er viktig å vurdere eksisterende kode før man begynner å bygge videre. Selv om prosjektet allerede hadde en enkel beregningslogikk, manglet det fortsatt flere sentrale deler før det kunne regnes som en ferdig kalkulator. Jeg fikk også tydeligere forståelse av hvordan klassifisering kan brukes som en del av prosjektet. |
-| Utfordringer | Det var litt utfordrende å vurdere hvor mye av det eksisterende prosjektet som kunne brukes videre, og hva som burde forbedres eller bygges på nytt. Det var også nødvendig å tenke gjennom hvordan maskinlæringsdelen skal passe naturlig inn i prosjektet. |
-| Løsning / neste steg | Jeg valgte å starte med å dokumentere prosjektets nåværende status og lage en tydelig plan i Kanban. Neste steg er å gjøre kalkulatoren mer komplett og deretter bygge inn klassifisering av brukerens mål på en enkel og forståelig måte. |
+- Hvordan strukturere kode i moduler (separere logikk og UI)
+- Hvordan bruke TypeScript for å definere typer
+- Hvordan lage en enkel klassifikasjonsmodell (regelbasert)
+- Hvordan koble backend-logikk til frontend-visning
 
+---
 
+## Utfordringer
 
+- Problemer med CSS-animasjon (Tailwind + keyframes)
+- Elementer som ikke ble synlige på grunn av opacity-klasser
+- Strukturering av komponenter og z-index
+
+---
+
+## Neste steg
+
+- Deploy prosjektet på Vercel
+- Forbedre klassifikasjonsmodellen (mer avansert logikk)
+- Eventuelt lagre brukerdata eller historikk
