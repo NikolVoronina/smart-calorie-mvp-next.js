@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import ResultCard from "@/components/ResultCard";
 import {
   calculateNutrition,
@@ -62,8 +63,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0f0f0f] px-6 py-10 text-white">
-      <section className="mx-auto max-w-5xl">
+    <main className="relative min-h-screen overflow-hidden bg-[#0f0f0f] px-6 py-10 text-white">
+      <AnimatedBackground />
+      <section className="relative z-10 mx-auto max-w-5xl">
         <div className="mb-10 max-w-2xl">
           <p className="text-sm uppercase tracking-[0.2em] text-lime-300">
             Healthy lifestyle tool
