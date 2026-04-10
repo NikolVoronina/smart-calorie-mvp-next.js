@@ -5,6 +5,8 @@ type ResultCardProps = {
   carbs: number;
   water: number;
   suggestedGoal: string;
+  goalReason: string;
+  recommendation: string;
 };
 
 export default function ResultCard({
@@ -14,6 +16,8 @@ export default function ResultCard({
   carbs,
   water,
   suggestedGoal,
+  goalReason,
+  recommendation,
 }: ResultCardProps) {
   const goalLabels: Record<string, string> = {
     fat_loss: "Fat loss",
@@ -25,13 +29,23 @@ export default function ResultCard({
     <section className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
       <h2 className="text-2xl font-semibold">Your results</h2>
       <p className="mt-2 text-sm text-white/70">
-        Based on your body data, activity level and goal.
+        Based on your body data, activity level, and optional measurements.
       </p>
 
       <div className="mt-4 rounded-2xl border border-lime-300/20 bg-lime-300/10 px-4 py-3">
         <p className="text-sm text-white/70">Suggested goal</p>
         <p className="mt-1 text-lg font-semibold text-lime-200">
           {goalLabels[suggestedGoal] ?? suggestedGoal}
+        </p>
+        <p className="mt-2 text-sm leading-6 text-white/70">
+          {goalReason}
+        </p>
+      </div>
+
+      <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3">
+        <p className="text-sm text-white/70">Recommendation</p>
+        <p className="mt-2 text-sm leading-6 text-white/80">
+          {recommendation}
         </p>
       </div>
 

@@ -12,7 +12,6 @@ type ClassifyGoalParams = {
   height: number;
   activity: Activity;
   selectedGoal: Goal;
-
   waist?: number;
   hips?: number;
   bodyFat?: number;
@@ -30,40 +29,47 @@ export function classifyGoal({
   const heightInMeters = height / 100;
   const bmi = weight / (heightInMeters * heightInMeters);
 
-  // 🔥 1. Body fat — самый приоритетный сигнал
+  // 1. Body fat has highest priority if available
   if (bodyFat !== undefined) {
-    if (bodyFat > 30) {
+    if (bodyFat >= 30) {
       return {
         suggestedGoal: "fat_loss",
-        reason: "Your body fat percentage is relatively high, so fat loss may be the most effective goal.",
+        reason: "Your body fat percentage is relatively high, so fat loss may be the most suitable goal right now.",
       };
     }
 
     if (bodyFat < 18) {
       return {
         suggestedGoal: "muscle_gain",
-        reason: "Your body fat percentage is low, so muscle gain may help improve strength and balance.",
+        reason: "Your body fat percentage is low, so muscle gain or maintenance may support better balance and recovery.",
+      };
+    }
+
+    if (bodyFat >= 18 && bodyFat < 30) {
+      return {
+        suggestedGoal: "maintenance",
+        reason: "Your body fat percentage is within a moderate range, so maintenance looks like a balanced recommendation.",
       };
     }
   }
 
-  // 🔥 2. Waist-to-hip ratio
-  if (waist !== undefined && hips !== undefined) {
+  // 2. Waist-to-hip ratio if available
+  if (waist !== undefined && hips !== undefined && hips > 0) {
     const ratio = waist / hips;
 
     if (ratio > 0.85) {
       return {
         suggestedGoal: "fat_loss",
-        reason: "Your waist-to-hip ratio suggests higher fat distribution, so fat loss may be beneficial.",
+        reason: "Your waist-to-hip ratio suggests that fat loss may be a useful focus.",
       };
     }
   }
 
-  // 🔥 3. BMI логика (fallback)
+  // 3. BMI fallback
   if (bmi >= 27) {
     return {
       suggestedGoal: "fat_loss",
-      reason: "Your BMI is above the normal range, so fat loss may be the most suitable goal.",
+      reason: "Your BMI is above the moderate range, so fat loss may be the most suitable goal.",
     };
   }
 
@@ -77,11 +83,11 @@ export function classifyGoal({
   if (bmi < 20 && activity !== "light") {
     return {
       suggestedGoal: "muscle_gain",
-      reason: "You are relatively light for your height and already active, so muscle gain may be beneficial.",
+      reason: "You are relatively light for your height and already active, so muscle gain may support strength and energy.",
     };
   }
 
-  // 🔥 4. Проверка выбранной цели
+  // 4. Check selected goal
   if (selectedGoal === "lose" && bmi < 20.5) {
     return {
       suggestedGoal: "maintenance",
@@ -92,7 +98,7 @@ export function classifyGoal({
   if (selectedGoal === "gain" && bmi >= 25) {
     return {
       suggestedGoal: "maintenance",
-      reason: "Muscle gain may not be the best first step based on your current BMI.",
+      reason: "Muscle gain may not be the best first step based on your current body data.",
     };
   }
 
