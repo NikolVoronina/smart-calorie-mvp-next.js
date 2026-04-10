@@ -21,6 +21,11 @@ export default function Home() {
   const [result, setResult] = useState<NutritionResult | null>(null);
   const [error, setError] = useState("");
 
+  const [chest, setChest] = useState<string>("");
+  const [waist, setWaist] = useState<string>("");
+  const [hips, setHips] = useState<string>("");
+  const [bodyFat, setBodyFat] = useState<string>("");
+
   const handleCalculate = () => {
     if (!age || !weight || !height) {
       setError("Please fill in age, weight and height.");
@@ -57,8 +62,14 @@ export default function Home() {
       gender,
       activity,
       goal,
+
+      chest: chest ? Number(chest) : undefined,
+      waist: waist ? Number(waist) : undefined,
+      hips: hips ? Number(hips) : undefined,
+      bodyFat: bodyFat ? Number(bodyFat) : undefined,
     });
 
+    console.log(calculatedResult);
     setResult(calculatedResult);
   };
 
@@ -158,6 +169,53 @@ export default function Home() {
                 <option value="maintain">Maintain</option>
                 <option value="gain">Gain muscle</option>
               </select>
+            </div>
+            <div className="sm:col-span-2">
+              <p className="mb-2 mt-2 text-sm text-white/60">Optional body data</p>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Chest (cm)</label>
+              <input
+                type="number"
+                value={chest}
+                onChange={(e) => setChest(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
+                placeholder="90"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Waist (cm)</label>
+              <input
+                type="number"
+                value={waist}
+                onChange={(e) => setWaist(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
+                placeholder="70"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Hips (cm)</label>
+              <input
+                type="number"
+                value={hips}
+                onChange={(e) => setHips(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
+                placeholder="98"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-white/70">Body fat (%)</label>
+              <input
+                type="number"
+                value={bodyFat}
+                onChange={(e) => setBodyFat(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 outline-none"
+                placeholder="24"
+              />
             </div>
           </div>
 

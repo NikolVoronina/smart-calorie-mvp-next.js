@@ -11,6 +11,7 @@ export type NutritionResult = {
   carbs: number;
   water: number;
   suggestedGoal: string;
+  goalReason: string;
 };
 
 type CalculateNutritionParams = {
@@ -20,6 +21,11 @@ type CalculateNutritionParams = {
   gender: Gender;
   activity: Activity;
   goal: Goal;
+
+  chest?: number;
+  waist?: number;
+  hips?: number;
+  bodyFat?: number;
 };
 
 export function calculateNutrition({
@@ -29,6 +35,10 @@ export function calculateNutrition({
   gender,
   activity,
   goal,
+  chest,
+  waist,
+  hips,
+  bodyFat,
 }: CalculateNutritionParams): NutritionResult {
   let bmr: number;
 
@@ -55,25 +65,27 @@ export function calculateNutrition({
   const calories = Math.round(totalCalories);
 
   const protein = Math.round(weight * 2);
-  const fat = Math.round(weight * 0.8);
-  const carbs = Math.round((calories - (protein * 4 + fat * 9)) / 4);
-  const water = Math.round(weight * 35);
+const fat = Math.round(weight * 0.8);
+const carbs = Math.round((calories - (protein * 4 + fat * 9)) / 4);
+const water = Math.round(weight * 35);
 
-  const suggestedGoal = classifyGoal({
+const goalClassification = classifyGoal({
   weight,
   height,
   activity,
+  selectedGoal: goal,
+  waist,
+  hips,
+  bodyFat,
 });
 
-  return {
-    calories,
-    protein,
-    fat,
-    carbs,
-    water,
-    suggestedGoal,
-  };
+return {
+  calories,
+  protein,
+  fat,
+  carbs,
+  water,
+  suggestedGoal: goalClassification.suggestedGoal,
+  goalReason: goalClassification.reason,
+};
 }
-
-
-//Что делает этот файл Он:считает BMR по Mifflin-St Jeor,умножает на активность,корректирует под цель,считает белки, жиры, углеводы и воду.
