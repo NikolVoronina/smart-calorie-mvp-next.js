@@ -171,7 +171,7 @@ export default function Home() {
               </select>
             </div>
             <div className="sm:col-span-2">
-              <p className="mb-2 mt-2 text-sm text-white/60">Optional body data</p>
+              <p className="mb-2 mt-2 text-sm text-white/60">Optional body data - not neccesary</p>
             </div>
 
             <div>
