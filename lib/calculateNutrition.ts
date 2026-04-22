@@ -1,4 +1,5 @@
 import { classifyGoal } from "@/lib/classifyGoal";
+import { generateTrainingPlan } from "@/lib/generateTrainingPlan";
 
 export type Gender = "male" | "female";
 export type Activity = "light" | "moderate" | "active";
@@ -13,6 +14,15 @@ export type NutritionResult = {
   suggestedGoal: string;
   goalReason: string;
   recommendation: string;
+  trainingPlan: {
+    weeklyWorkouts: number;
+    strengthSessions: number;
+    cardioSessions: number;
+    stepTarget: string;
+    focus: string;
+    priority: string;
+    recoveryNote: string;
+  };
 };
 
 type CalculateNutritionParams = {
@@ -42,12 +52,11 @@ export function calculateNutrition({
 }: CalculateNutritionParams): NutritionResult {
   let bmr: number;
 
-  // If body fat is available, use Katch-McArdle (more personalized)
+
   if (bodyFat !== undefined && bodyFat > 0 && bodyFat < 70) {
     const leanBodyMass = weight * (1 - bodyFat / 100);
     bmr = 370 + 21.6 * leanBodyMass;
   } else {
-    // Fallback: Mifflin-St Jeor
     if (gender === "male") {
       bmr = 10 * weight + 6.25 * height - 5 * age + 5;
     } else {
@@ -103,6 +112,12 @@ export function calculateNutrition({
     bodyFat,
   });
 
+  const trainingPlan = generateTrainingPlan({
+  suggestedGoal: goalClassification.suggestedGoal,
+  activity,
+  bodyFat,
+});
+
   const recommendation = buildRecommendation({
     goal,
     suggestedGoal: goalClassification.suggestedGoal,
@@ -114,16 +129,17 @@ export function calculateNutrition({
     protein,
   });
 
-  return {
-    calories,
-    protein,
-    fat,
-    carbs,
-    water,
-    suggestedGoal: goalClassification.suggestedGoal,
-    goalReason: goalClassification.reason,
-    recommendation,
-  };
+return {
+  calories,
+  protein,
+  fat,
+  carbs,
+  water,
+  suggestedGoal: goalClassification.suggestedGoal,
+  goalReason: goalClassification.reason,
+  recommendation,
+  trainingPlan,
+};
 }
 
 type RecommendationParams = {

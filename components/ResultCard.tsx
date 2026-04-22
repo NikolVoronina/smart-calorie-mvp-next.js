@@ -7,6 +7,15 @@ type ResultCardProps = {
   suggestedGoal: string;
   goalReason: string;
   recommendation: string;
+  trainingPlan: {
+    weeklyWorkouts: number;
+    strengthSessions: number;
+    cardioSessions: number;
+    stepTarget: string;
+    focus: string;
+    priority: string;
+    recoveryNote: string;
+  };
 };
 
 export default function ResultCard({
@@ -18,7 +27,8 @@ export default function ResultCard({
   suggestedGoal,
   goalReason,
   recommendation,
-}: ResultCardProps) {
+  trainingPlan,
+}: ResultCardProps)  {
   const goalLabels: Record<string, string> = {
     fat_loss: "Fat loss",
     maintenance: "Maintenance",
@@ -75,6 +85,62 @@ export default function ResultCard({
           <p className="mt-2 text-2xl font-bold">{water} ml</p>
         </div>
       </div>
+      <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-4">
+  <p className="text-sm text-white/70">Training recommendation</p>
+
+  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+    <div>
+      <p className="text-sm text-white/50">Weekly workouts</p>
+      <p className="mt-1 text-base font-semibold text-white">
+        {trainingPlan.weeklyWorkouts}
+      </p>
+    </div>
+
+    <div>
+      <p className="text-sm text-white/50">Strength sessions</p>
+      <p className="mt-1 text-base font-semibold text-white">
+        {trainingPlan.strengthSessions}
+      </p>
+    </div>
+
+    <div>
+      <p className="text-sm text-white/50">Cardio sessions</p>
+      <p className="mt-1 text-base font-semibold text-white">
+        {trainingPlan.cardioSessions}
+      </p>
+    </div>
+
+    <div>
+      <p className="text-sm text-white/50">Daily steps</p>
+      <p className="mt-1 text-base font-semibold text-white">
+        {trainingPlan.stepTarget}
+      </p>
+    </div>
+  </div>
+
+  <div className="mt-4 space-y-3">
+    <div>
+      <p className="text-sm text-white/50">Main focus</p>
+      <p className="mt-1 text-sm leading-6 text-white/80">
+        {trainingPlan.focus}
+      </p>
+    </div>
+
+    <div>
+      <p className="text-sm text-white/50">Priority</p>
+      <p className="mt-1 text-sm leading-6 text-white/80">
+        {trainingPlan.priority}
+      </p>
+    </div>
+
+    <div>
+      <p className="text-sm text-white/50">Recovery note</p>
+      <p className="mt-1 text-sm leading-6 text-white/80">
+        {trainingPlan.recoveryNote}
+      </p>
+    </div>
+  </div>
+</div>
     </section>
   );
 }
