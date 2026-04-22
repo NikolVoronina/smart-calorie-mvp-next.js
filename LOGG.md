@@ -150,7 +150,7 @@ Prosjektet har nå blitt et komplett system som kombinerer:
 
 Gjennom prosjektet har vi gått fra en enkel kalkulator til et mer avansert system.
 
-Vi har lært:
+Jeg har lært:
 - hvordan strukturere kode i moduler
 - hvordan bygge opp logikk steg for steg
 - hvordan bruke flere datapunkter for å forbedre nøyaktighet
